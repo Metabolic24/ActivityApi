@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8091")
+@CrossOrigin(origins = "http://localhost:8080") // Here is expected the URL of the VueJs application
 public class AppController {
 
     List<Activity> activities = Arrays.asList(
