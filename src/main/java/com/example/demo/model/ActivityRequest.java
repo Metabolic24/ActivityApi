@@ -10,6 +10,13 @@ public class ActivityRequest {
     public ActivityRequest() {
     }
 
+    public ActivityRequest(String type, Integer participants, Double minPrice, Double maxPrice) {
+        this.type = type;
+        this.participants = participants;
+        this.minPrice = minPrice;
+        this.maxPrice = maxPrice;
+    }
+
     public String getType() {
         return type;
     }

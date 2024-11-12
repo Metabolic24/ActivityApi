@@ -2,10 +2,7 @@ package com.example.demo.api;
 
 import com.example.demo.model.Activity;
 import com.example.demo.model.ActivityRequest;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,11 +25,8 @@ public class AppController {
     }
 
     @GetMapping("/filter")
-    public List<Activity> filterActivities(@RequestBody ActivityRequest request) {
-        if (request == null) {
-            return activities;
-        }
-
+    public List<Activity> filterActivities(@RequestParam String type, @RequestParam Integer participants, @RequestParam Double minPrice, @RequestParam Double maxPrice) {
+        ActivityRequest request = new ActivityRequest(type, participants, minPrice, maxPrice);
         return activities.stream().filter(activity -> filterPredicate(activity, request)).toList();
     }
 
