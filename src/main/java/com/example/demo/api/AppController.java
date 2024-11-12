@@ -25,7 +25,7 @@ public class AppController {
     }
 
     @GetMapping("/filter")
-    public List<Activity> filterActivities(@RequestParam String type, @RequestParam Integer participants, @RequestParam Double minPrice, @RequestParam Double maxPrice) {
+    public List<Activity> filterActivities(@RequestParam(required = false) String type, @RequestParam(required = false) Integer participants, @RequestParam(required = false) Double minPrice, @RequestParam(required = false) Double maxPrice) {
         ActivityRequest request = new ActivityRequest(type, participants, minPrice, maxPrice);
         return activities.stream().filter(activity -> filterPredicate(activity, request)).toList();
     }
