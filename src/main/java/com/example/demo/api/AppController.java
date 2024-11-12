@@ -1,7 +1,9 @@
 package com.example.demo.api;
 
 import com.example.demo.model.Activity;
+import com.example.demo.model.ActivityError;
 import com.example.demo.model.ActivityRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -25,9 +27,15 @@ public class AppController {
     }
 
     @GetMapping("/filter")
-    public List<Activity> filterActivities(@RequestParam(required = false) String type, @RequestParam(required = false) Integer participants, @RequestParam(required = false) Double minPrice, @RequestParam(required = false) Double maxPrice) {
+    public ResponseEntity<?> filterActivities(@RequestParam(required = false) String type, @RequestParam(required = false) Integer participants, @RequestParam(required = false) Double minPrice, @RequestParam(required = false) Double maxPrice) {
         ActivityRequest request = new ActivityRequest(type, participants, minPrice, maxPrice);
-        return activities.stream().filter(activity -> filterPredicate(activity, request)).toList();
+        List<Activity> filteredActivities = activities.stream().filter(activity -> filterPredicate(activity, request)).toList();
+
+        if (filteredActivities.isEmpty()) {
+            return ResponseEntity.badRequest().body(new ActivityError());
+        } else {
+            return ResponseEntity.ok().body(filteredActivities);
+        }
     }
 
     public boolean filterPredicate(Activity activity, ActivityRequest request) {
