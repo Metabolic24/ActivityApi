@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8091")
 public class AppController {
     @GetMapping("/activity")
     public List<Activity> getActivities() {
