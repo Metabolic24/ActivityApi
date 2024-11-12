@@ -1,6 +1,7 @@
 package com.example.demo.api;
 
 import com.example.demo.model.Activity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8080")
 public class AppController {
     @GetMapping("/activity")
     public List<Activity> getActivities() {
